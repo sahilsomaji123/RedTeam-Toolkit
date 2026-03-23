@@ -14,6 +14,7 @@ A comprehensive, menu-driven cybersecurity toolkit designed for educational purp
 ## 🚀 Features
 
 ### 🎣 **Module 1: Phishing & Social Engineering**
+- 🚀 **FULLY AUTOMATED PHISHING** - One command, get final link instantly!
 - 🌐 **Real-time Website Cloning** (HTTrack + wget)
 - 📧 **Email Template Generator**
 - 🔐 **Credential Capture Server** (automatic logging)

