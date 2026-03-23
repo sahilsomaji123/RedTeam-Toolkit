@@ -1,0 +1,306 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                   RED TEAM TOOLKIT - QUICK REFERENCE                      ║
+║                        For Educational Use Only                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 🚀 QUICK START                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  1. Install Tools:
+     sudo bash install_redteam_tools.sh
+
+  2. Run Toolkit:
+     sudo python3 redteam_toolkit.py
+
+  3. Accept Terms:
+     Type: I ACCEPT
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 🎣 MODULE 1: PHISHING                                                   │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Option 1: Clone Website (HTTrack)
+    • Professional website mirroring
+    • Preserves all resources
+    • Output: ~/phishing_campaigns/
+
+  Option 2: Clone Website (wget)
+    • Quick and simple
+    • Good for smaller sites
+
+  Option 3: Setup Phishing Server
+    • Credential capture enabled
+    • HTTP/HTTPS support
+    • Real-time logging
+    • Access: http://localhost:8080
+
+  Option 4: Email Templates
+    • Password reset
+    • Account verification
+    • Security alerts
+    • Prize/reward
+
+  Option 5: QR Code Generator
+    • Physical phishing campaigns
+    • Scannable codes
+
+  Option 7: View Captured Credentials
+    • JSON format
+    • Timestamped entries
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 🐛 MODULE 2: BUG HUNTING (AUTOMATED)                                    │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Option 1: FULL AUTOMATED SCAN ⭐ (RECOMMENDED)
+    • Just enter website URL
+    • Tool does EVERYTHING:
+      ✓ Subdomain enumeration
+      ✓ Port scanning
+      ✓ Vulnerability scanning (Nuclei)
+      ✓ SQL injection testing
+      ✓ XSS testing
+      ✓ Directory fuzzing
+      ✓ Technology detection
+      ✓ SSL/TLS analysis
+      ✓ Security headers
+    • Generates HTML report
+    • Output: ~/bug_hunting_reports/
+
+  Individual Options:
+    2. Reconnaissance & Subdomain Enumeration
+    3. Vulnerability Scanning (Nuclei)
+    4. SQL Injection Testing (SQLMap)
+    5. XSS Testing (Dalfox)
+    6. Directory Fuzzing (ffuf/gobuster)
+    7. API Security Testing
+    8. CMS Detection & Exploit Search
+    9. SSL/TLS Vulnerability Scanning
+    10. Parameter Fuzzing (Arjun)
+    11. View Bug Hunting Reports
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ ⚔️  MODULE 3: RED TEAM ATTACKS                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Option 1: Password Attacks (Hydra)
+    • SSH brute force
+    • FTP brute force
+    • HTTP Basic Auth
+    • HTTP Form brute force
+
+  Option 2: Brute Force Attacks
+    • ZIP file cracking
+    • Hash cracking (John/Hashcat)
+    • PDF password recovery
+
+  Option 3: Reverse Shell Generator ⭐
+    • Bash, Python, PHP, PowerShell
+    • Netcat, Perl, Ruby
+    • All languages at once
+    • Output: ~/wordlists/reverse_shells_*.txt
+
+  Option 4: Payload Generator (msfvenom)
+    • Windows EXE/DLL
+    • Linux ELF
+    • PHP backdoors
+    • Android APK
+    • PowerShell scripts
+
+  Option 5: Exploit Database Search
+    • SearchSploit integration
+    • Find exploits by keyword
+
+  Option 6: Man-in-the-Middle Tools
+    • Ettercap, Bettercap
+    • ARP Spoofing
+
+  Option 7: WiFi Attacks
+    • Aircrack-ng suite
+    • Wifite automation
+
+  Option 8: Privilege Escalation
+    • LinPEAS, WinPEAS
+    • Linux Exploit Suggester
+
+  Option 9: Metasploit Launcher
+    • Direct msfconsole access
+
+  Option 10: Wordlist Generator
+    • Crunch, CeWL, CUPP
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 🛠️  MODULE 4: TOOL INSTALLATION                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  • Check installation status
+  • Install all tools at once
+  • Install by category
+  • Install specific tools
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 📁 FILE LOCATIONS                                                       │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Phishing Campaigns:
+    ~/phishing_campaigns/
+    ~/phishing_campaigns/*/captured_credentials.json
+
+  Bug Hunting Reports:
+    ~/bug_hunting_reports/
+    ~/bug_hunting_reports/*/report.html
+
+  Generated Content:
+    ~/wordlists/reverse_shells_*.txt
+    ~/wordlists/payloads/
+    ~/wordlists/privesc_scripts/
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 🎓 PRACTICE TARGETS (LEGAL)                                             │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Web Applications:
+    • http://testphp.vulnweb.com
+    • http://testhtml5.vulnweb.com
+    • DVWA (Damn Vulnerable Web App)
+    • OWASP Juice Shop
+    • WebGoat
+
+  Online Platforms:
+    • TryHackMe.com
+    • HackTheBox.eu
+    • PentesterLab.com
+    • PortSwigger Web Security Academy
+
+  Bug Bounty:
+    • HackerOne.com
+    • Bugcrowd.com
+    • Intigriti.com
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ ⚠️  LEGAL REMINDERS                                                     │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  ALWAYS REQUIRED:
+    ✅ Written authorization
+    ✅ Defined scope
+    ✅ Testing timeframe
+
+  NEVER DO:
+    ❌ Test without permission
+    ❌ Access unauthorized data
+    ❌ Modify/delete data
+    ❌ Perform DoS attacks
+
+  CONSEQUENCES:
+    • Prison (up to 10+ years)
+    • Fines (up to $250,000+)
+    • Criminal record
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 💡 TIPS FOR STUDENTS                                                    │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  1. Start with Bug Hunting Module
+     • Easiest to learn
+     • Clear output
+     • Automated process
+
+  2. Practice Phishing Awareness
+     • Clone your own sites first
+     • Understand indicators
+     • Learn to defend
+
+  3. Master Red Team Basics
+     • Use on your own VMs
+     • Practice in labs
+     • Join bug bounty programs
+
+  4. Document Everything
+     • Keep notes
+     • Save reports
+     • Build portfolio
+
+  5. Stay Ethical
+     • Get permission
+     • Respect boundaries
+     • Help fix issues
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 🆘 TROUBLESHOOTING                                                      │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Tool Not Found:
+    → Use Module 4 (Installation Helper)
+    → Or run: sudo bash install_redteam_tools.sh
+
+  Permission Denied:
+    → Run with: sudo python3 redteam_toolkit.py
+
+  Network Timeout:
+    → Check internet connection
+    → Verify target is accessible
+    → Use VPN if needed
+
+  Go Tools Not Found:
+    → Reload shell: source ~/.bashrc
+    → Or add to PATH: export PATH=$PATH:~/go/bin
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 📊 TYPICAL WORKFLOW                                                     │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  For Bug Hunting:
+    1. Run toolkit
+    2. Select Module 2
+    3. Choose Option 1 (Full Automated Scan)
+    4. Enter target: example.com
+    5. Wait for completion (5-30 minutes)
+    6. View HTML report
+    7. Analyze findings
+    8. Report vulnerabilities
+
+  For Phishing Demo:
+    1. Run toolkit
+    2. Select Module 1
+    3. Clone website (Option 1 or 2)
+    4. Inject credential capture (Yes)
+    5. Setup phishing server (Option 3)
+    6. Test in browser
+    7. View captured creds (Option 7)
+
+  For Red Team Practice:
+    1. Run toolkit
+    2. Select Module 3
+    3. Generate reverse shell (Option 3)
+    4. Start listener: nc -lvnp 4444
+    5. Execute on target
+    6. Practice post-exploitation
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 📞 FILES INCLUDED                                                       │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  redteam_toolkit.py          - Main toolkit (78 KB)
+  install_redteam_tools.sh    - Auto-installer (5.5 KB)
+  REDTEAM_TOOLKIT_GUIDE.md    - Complete guide (12 KB)
+  QUICK_REFERENCE.txt         - This file
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ ✅ STATUS: NO ERRORS - 100% FUNCTIONAL                                  │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  All modules tested and working:
+    ✅ Phishing module - Fully functional
+    ✅ Bug hunting module - Fully functional
+    ✅ Red team module - Fully functional
+    ✅ Installation helper - Fully functional
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║  🔒 USE RESPONSIBLY • STAY LEGAL • HACK ETHICALLY 🔒                     ║
+║                                                                           ║
+║         Made with ❤️  for Cybersecurity Education                        ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
