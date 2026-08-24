@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Gate2 RESULT",
+  "type": "object",
+  "required": ["final_determination", "experiment_version", "preregistration_hash"],
+  "properties": {
+    "final_determination": {"enum": ["PASS", "FAIL_VACUOUS", "BLOCKED"]},
+    "experiment_version": {"type": "string"},
+    "preregistration_hash": {"type": "string"},
+    "model_hashes": {"type": "object"},
+    "corpus_hash": {"type": "string"},
+    "query_workload_hash": {"type": "string"},
+    "trigger_lattice_hash": {"type": "string"},
+    "embedding_regime": {"type": "array", "items": {"enum": ["DPR", "bge"]}},
+    "num_trials": {"type": "integer"},
+    "successful_poison_instances": {"type": "array", "items": {"type": "object"}},
+    "baseline_calibration": {"type": "object"},
+    "aggregate": {
+      "type": "object",
+      "properties": {
+        "asr_trigger": {"type": "object"},
+        "dormancy": {"type": "object"},
+        "retrieval_hit_rate": {"type": "object"},
+        "memsad": {"type": "object"},
+        "qpd": {"type": "object"},
+        "auroc": {"type": "object"},
+        "tpr_at_alpha": {"type": "object"},
+        "fpr": {"type": "object"}
+      }
+    },
+    "compute_budget": {"type": "object"},
+    "random_seeds": {"type": "array"},
+    "missing_infrastructure": {"type": "array"},
+    "gpu_available": {"type": "boolean"},
+    "reason": {"type": "string"},
+    "note": {"type": "string"},
+    "timestamp_utc": {"type": "string"}
+  }
+}
