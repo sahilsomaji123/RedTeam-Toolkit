@@ -30,6 +30,17 @@ NOT official. Do not implement until every "MUST EXTRACT FROM PDF" item is fille
 - Implement `calibrate()` to reproduce the MINJA window above; if it cannot within a scientifically
   justified tolerance → **STATUS = BLOCKED** (do not tune to pass our experiment).
 
+## Code-availability update — 2026-08-24 (search-level, sandbox egress-blocked)
+- Paper confirmed: arXiv:2605.03482, Ishrith Gowda (UC Berkeley); Stackelberg framing over three
+  attack classes (AgentPoison WRITE / MINJA QUERY / InjecMEM SINGLE); MEMSAD = calibration-based
+  defense grounded in a **gradient-coupling theorem**.
+- **No official code located.** Author has a GitHub profile (`github.com/ishrith-gowda`, ~12 repos)
+  but **no MEMSAD repository was visible** in search; no Papers-With-Code / project-page code link
+  surfaced. ⇒ **ON THE NETWORKED MACHINE: re-check the author's GitHub + the PDF for a code link;**
+  if none, proceed with the **faithful reimplementation** below (labeled non-official), and it is
+  usable ONLY after `calibrate()` reproduces the paper's MINJA window (≈ TPR 0.40 / AUROC 0.914).
+- Contact of record for a code request: ishrithgowda@berkeley.edu (author's stated email).
+
 ## Fidelity rules
 Do not modify the mechanism; do not substitute a generic anomaly detector; do not use TF-IDF/BM25;
 label the artifact "faithful reimplementation (non-official)"; record every deviation from the paper.

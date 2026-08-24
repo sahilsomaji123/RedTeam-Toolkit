@@ -52,7 +52,24 @@ tool-config over the 72-context lattice), **not** on a query keyword. Two conseq
   that is itself a finding to **report** (it bears on whether QPD is an appropriate baseline for this
   cell), **not** a licence to weaken or swap the baseline.
 
+## Code-availability update — 2026-08-24 (search-level, sandbox egress-blocked)
+- Paper confirmed: *Semantic Chameleon: Corpus-Dependent Poisoning Attacks and **Defenses** in RAG
+  Systems*, arXiv:2603.18034, Scott Thornton (independent; scott@perfecxion.ai), submitted 2026-03-10.
+- **Official code likely EXISTS.** The paper states: *"Defense implementations, experiment scripts,
+  evaluation results, and sanitized examples are available"* at a URL that is **truncated in the search
+  index** — I could not resolve the exact repository URL from this sandbox (arXiv full text / project
+  page egress-blocked). ⇒ **ON THE NETWORKED MACHINE: resolve the exact code URL from the PDF
+  (arxiv.org/pdf/2603.18034) or perfecxion.ai, and prefer the official implementation over reimplementation.**
+- QPD is characterized in the paper as measuring **document behavior** (retrieval frequency across a
+  query workload) rather than static properties, and as giving "the strongest cross-corpus detection
+  signal" — consistent with the retrieval-selectivity mechanism above.
+- ⚠ Note: the paper's *architectural* defense is a **hybrid BM25 + vector retriever** (reduced one
+  gradient-guided attack from 38% → 0%). That hybrid retriever is **NOT** QPD and is **NOT** our frozen
+  dense-only regime — do not import it. We use **QPD the detector** (retrieval-selectivity scorer) only,
+  as a baseline over the frozen DPR/bge dense retrieval.
+
 ## Fidelity rules
 Do not modify the mechanism; do not substitute a generic anomaly detector; do not use TF-IDF/BM25;
-do not weaken QPD to inflate evasion; label the artifact "faithful reimplementation (non-official)";
-record every deviation from the paper.
+do not import the paper's hybrid-retriever architectural defense in place of the QPD detector;
+do not weaken QPD to inflate evasion; label any reimplementation "faithful reimplementation
+(non-official)"; record every deviation from the paper.
