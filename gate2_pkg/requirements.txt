@@ -1,0 +1,18 @@
+# Pin exact versions with `pip freeze > requirements.lock` after first install, and commit the lock.
+# Dense-retrieval regime only. GPU strongly recommended for the agent LLM.
+torch>=2.2
+transformers>=4.44
+sentence-transformers>=3.0
+faiss-cpu>=1.8            # or faiss-gpu
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.4        # metrics ONLY (AUROC/ROC); never used as an embedder
+pandas>=2.2
+pyyaml>=6.0
+orjson>=3.10
+tqdm>=4.66
+# Agent LLM backend: either local (vllm>=0.5 or transformers) or a pinned API client.
+# MEMSAD and QPD baseline code are NOT on PyPI: obtain from the authors' repositories
+#   MEMSAD  -> arXiv:2605.03482  (drop into gate2/baselines_impl/memsad/)
+#   QPD     -> arXiv:2603.18034  (Semantic Chameleon; drop into gate2/baselines_impl/qpd/)
+# or reimplement strictly to the papers and pass the calibration gate (see gate2/baselines.py).
